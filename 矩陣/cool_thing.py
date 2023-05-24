@@ -1,18 +1,21 @@
 import numpy as np
 from easygui import *
 from ip_to_array import *
+from det import *
 
 def renew_input_line():
     global input_line
     input_line=f"""Your Matrixs : {set(matrix_dict.keys())}\n
     0 : Input Data
     1 : Check Data
-    2 : Operatation\n\n"""
+    2 : Operatation
+    3 : Value\n\n"""
 
 
 
 matrix_dict={'0':np.zeros((2,2)), '1':np.array([[1,0],[0,1]])}
-operator=["+","-","*constant","*matrix"]
+Operator=["+","-","*constant","*matrix"]
+Value=["determine","rank"]
 renew_input_line()
 while True:
     #try:
@@ -29,7 +32,7 @@ while True:
     if ip==2:
         ip=enterbox("The Name Of New Or Old Matrix: ")
         A=choicebox("What Do You Want To Calculate?","",matrix_dict)
-        op=choicebox(f"{A}","",operator)
+        op=choicebox(f"{A}","",Operator)
         if op=="+":
             B=choicebox(f"{A} +","",matrix_dict)
             matrix_dict[ip]=matrix_dict[A]+matrix_dict[B]
@@ -51,6 +54,12 @@ while True:
             msgbox(f"{ip} = {A} * {B} = {matrix_dict[ip]}")
 
         renew_input_line()
+
+    if ip==3:
+        op=choicebox("What Do You Want To Calculate?","",Value)
+        if op=="determine":
+            A=choicebox("det()","",matrix_dict)
+            msgbox(f"det({A})={det(matrix_dict[A])}")
         
 
             
