@@ -38,12 +38,12 @@ def N(A=np.array([[1,0],[0,1]])):
     freevars=list(set([i for i in range(B.shape[1])])-set(vars))
     if freevars==set():
         return tuple()
-    Ns=[]
+    Ns=list(np.zeros((len(freevars),B.shape[1]),Rational))
     for i in range(len(freevars)):
-        sol=list(np.zeros((B.shape[0]),Rational))
-        sol[freevars[i]]=Rational(1)
-        Ns.append(sol)
+        Ns[i][freevars[i]]=Rational(1)
     if vars==[]:
+        for i in range(len(Ns)):
+            Ns[i]=tuple(Ns[i])
         return tuple(Ns)
     for i in range(len(Ns)):
         for j in range(len(vars)):

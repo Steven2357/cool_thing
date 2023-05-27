@@ -5,11 +5,17 @@ from sympy import Rational
 def ip_to_array(N="N"):
     Ip=[]
     ip=""
+    num=1
+    ouput=""
     while True:
-        ip=enterbox(f"{N} = ",N)
+        ouput="\n".join(Ip)
+        ip=enterbox(f"""{N} =
+{ouput}
+input row #{num} of {N} : (example : 1 2 3, if done leave it blank)""",N)
         if ip=="":
             break
         Ip.append(ip)
+        num+=1
     Ipp=[]
     lenIpp=[]
     for item in Ip:

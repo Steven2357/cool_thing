@@ -5,20 +5,22 @@ def reche(A0=np.array([[1,0],[0,1]])):
     A=A0.copy()
     m=A.shape[0]
     n=A.shape[1]
-    for j in range(min(m,n)):
+    num=0
+    for j in range(n):
         if list(A[:,j])==list(np.zeros((m))):
             continue
-        for i in range(j,m):
+        for i in range(num,m):
             if A[i,j]!=0:
-                tmp=A[j]
-                A[j]=A[i]
+                tmp=A[num].copy()
+                A[num]=A[i]
                 A[i]=tmp
-                tmp=A[j,j]
+                tmp=A[num,j]
                 for j0 in range(n):
-                    A[j,j0]=Rational(A[j,j0],tmp)
+                    A[num,j0]=Rational(A[num,j0],tmp)
+                num+=1
                 break
-        for i in range(j+1,m):
-            A[i]+=A[j]*(-A[i,j])
+        for i in range(num,m):
+            A[i]+=A[num-1]*(-A[i,j])
 
     for i in range(m-1,0,-1):
         if list(A[i])==list(np.zeros((n))):
