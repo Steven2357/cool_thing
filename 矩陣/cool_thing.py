@@ -14,13 +14,15 @@ def renew_input_line():
     0 : Input Data
     1 : Check Data
     2 : Operatation
-    3 : Value\n\n"""
+    3 : Value
+    4 : Spaces\n\n"""
 
 
 
 matrix_dict={'0':np.zeros((2,2),dtype=Rational), '1':np.array([[1,0],[0,1]],dtype=Rational)}
 Operator=["+","-","*constant","*matrix","transpose","reduce echelon form","inverse"]
 Value=["determine","rank","nullity"]
+Spaces=["col","N"]
 x=Symbol("x")
 renew_input_line()
 while True:
@@ -74,13 +76,22 @@ while True:
         op=choicebox("What Do You Want To Calculate?","",Value)
         if op=="determine":
             A=choicebox("det()","",matrix_dict)
-            msgbox(f"det({A})={det(matrix_dict[A])}")
+            msgbox(f"det({A}) = {det(matrix_dict[A])}")
         elif op=="rank":
             A=choicebox("rank()","",matrix_dict)
-            msgbox(f"rank({A})={rank(matrix_dict[A])}")
+            msgbox(f"rank({A}) = {rank(matrix_dict[A])}")
         elif op=="nullity":
             A=choicebox("nullity()","",matrix_dict)
-            msgbox(f"nullity({A})={nullity(matrix_dict[A])}")
+            msgbox(f"nullity({A}) = {nullity(matrix_dict[A])}")
+
+    if ip==4:
+        op=choicebox("What Do You Want To Calculate?","",Spaces)
+        if op=="col":
+            A=choicebox("col()","",matrix_dict)
+            msgbox(f"col({A}) = span{col(matrix_dict[A])}")
+        if op=="N":
+            A=choicebox("N()","",matrix_dict)
+            msgbox(f"N({A}) = span{N(matrix_dict[A])}")
         
 
             
